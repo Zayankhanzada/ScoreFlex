@@ -1,34 +1,15 @@
 import { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 import favicon from "/favicon.png";
 
 export default function Navbar() {
-    const [theme, setTheme] = useState({
-        mode: "light",
-        color: "#1E293B",
-        backgroundColor: "#F8FAFC",
-    });
 
+    const {theme, changeTheme} = useTheme();
     const [profileOpen, setProfileOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
+    const isDark = theme.mode === "dark"
 
-    const changeTheme = () => {
-        setTheme((prev) =>
-            prev.mode === "light"
-                ? {
-                    mode: "dark",
-                    color: "#F1F5F9",
-                    backgroundColor: "#353839",
-                }
-                : {
-                    mode: "light",
-                    color: "#1E293B",
-                    backgroundColor: "#F8FAFC",
-                }
-        );
-    };
-
-    const isDark = theme.mode === "dark";
 
     const profileButton = (
         <button
