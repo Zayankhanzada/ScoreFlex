@@ -61,7 +61,7 @@ export default function Navbar() {
 
     return (
         <nav
-            className="relative flex items-center justify-between border-b px-4 py-3 sm:px-6"
+            className="relative flex items-center justify-between border-b  py-3 sm:px-6 lg:px-30"
             style={{
                 color: theme.color,
                 backgroundColor: theme.backgroundColor,
