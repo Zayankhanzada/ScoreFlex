@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import './App.css';
+import Footer from './components/Footer';
 
 
 //Cards Content
@@ -83,8 +84,8 @@ function App() {
       </section>
 
       <section
-        className="py-10 sm:py-12"
-        style={{ backgroundColor: theme.backgroundColor }}
+        className="py-10 sm:py-12 bg-[#eff4ff]"
+        // style={{ backgroundColor: theme.backgroundColor }}
         aria-label="Quiz platform features"
       >
         <div className="mx-auto max-w-6xl px-4 ">
@@ -97,16 +98,16 @@ function App() {
                   key={feature.title}
                   className="
               group flex h-full items-start text-start gap-6
-              rounded-2xl border border-white-200
-               px-6 py-10
+              rounded-2xl
+               px-8 py-10
               shadow-[0_1px_3px_rgba(15,23,42,0.04)]
               transition-all duration-300 ease-out
               hover:-translate-y-1
-              hover:border-blue-200
+              bg-white 
               hover:shadow-[0_10px_28px_-10px_rgba(37,99,235,0.18)]
               motion-reduce:transform-none
               motion-reduce:transition-none
-            "
+            " style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
                 >
                   {/* Icon container */}
                   <div
@@ -183,6 +184,7 @@ function App() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   )
 }
