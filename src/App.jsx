@@ -6,7 +6,6 @@ import {
   Sparkles,
   Radio,
   MonitorSmartphone,
-  ArrowRight,
 } from "lucide-react";
 
 import './App.css';
@@ -49,44 +48,176 @@ const featureIcons = {
 };
 
 function App() {
-  const { theme, changeTheme } = useTheme();
+  const { theme, changeTheme, mode } = useTheme();
   return (
     <>
       <Navbar />
-      <section className="bg-white dark:bg-gray-900" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
-        <div className="flex lg:flex-row flex-col items-center justify-between max-w-7xl px-6 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:grid-cols-12">
+      <section
+        className="w-full mx-0 md:px-12"
+        style={{
+          backgroundColor: theme.backgroundColor,
+          color: theme.color,
+        }}
+      >
+        <div
+          className="
+      mx-auto grid w-full max-w-7xl grid-cols-1
+      items-center gap-8 px-4 py-12
+      sm:px-6 sm:py-16
+      lg:min-h-165 lg:grid-cols-2
+      lg:gap-12 lg:px-8 lg:py-12
+      xl:gap-16
+    "
+        >
+          <div
+            className="
+        mx-auto flex w-full max-w-2xl min-w-0
+        flex-col items-center gap-5 text-center
+        lg:mx-0 lg:items-start lg:text-left
+      "
+          >
+            <span
+              className={` ${mode == 'light' ? 'bg-blue-100' : 'bg-[#414648] text-white'}
+          inline-flex max-w-full items-center justify-center
+          gap-2 self-center rounded-full
+       px-3 py-2
+          font-semibold leading-tight text-[#101C32]
+          sm:px-4
+          lg:self-start 
+        `}
+            >
+              <span
+                className="h-2 w-2 shrink-0 rounded-full bg-[#2850E8]"
+                aria-hidden="true"
+              />
 
-          <div className=" col-span-12 lg:col-span-7 mx-auto flex flex-col text-center lg:text-start gap-4 mt-0">
-            <span className="inline-flex w-fit max-w-full items-center gap-2 rounded-full bg-blue-100 px-3 py-1.5 text-[14px] font-semibold leading-tight text-[#101C32] sm:px-4 sm:py-2">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-[#2850E8]" />
-              <span className="min-w-0">
+              <span className="text-[11px] lg:text-[12px] md:text-[14px]">
                 NEXT-GEN LIVE KNOWLEDGE TESTING HUB
               </span>
             </span>
-            <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl xl:text-6xl mt-0" style={{ color: theme.color }}>Turn your ideas into
-              <span className='bg-linear-to-r from-[#2850E8] to-[#6545D8] bg-clip-text text-transparent'> interactive quizzes </span></h1>
-            <p className="font-light text-gray-500  md:text-lg  dark:text-gray-400 text-[14px]" style={{ color: theme.color }}>Create, host and play quizzes with friends, colleagues, or your global community. It's fast, beautifully responsive, and designed for pure engagement.</p>
-            <div className='mt-4'>
-              <a href="#" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900" style={{ color: theme.color }}>
+
+            <h1
+              className="
+          text-balance text-4xl font-extrabold
+          leading-[1.12] tracking-tight
+          sm:text-5xl xl:text-6xl
+        "
+              style={{ color: theme.color }}
+            >
+              Turn your ideas into{" "}
+              <span className="bg-linear-to-r from-[#2850E8] to-[#6545D8] bg-clip-text text-transparent">
+                interactive quizzes
+              </span>
+            </h1>
+
+            <p
+              className="max-w-xl text-base leading-7 sm:text-lg"
+              style={{
+                color: theme.color,
+              }}
+            >
+              Create, host and play quizzes with friends, colleagues,
+              or your global community. It's fast, beautifully
+              responsive, and designed for pure engagement.
+            </p>
+
+            <div
+              className="
+          mt-2 flex w-full flex-wrap items-center
+          justify-center gap-3
+          lg:justify-start
+        "
+            >
+              <a
+                href="/join"
+                className="
+            inline-flex items-center justify-center gap-2
+            rounded-xl bg-[#2850E8] px-5 py-3
+            text-sm font-semibold text-white
+            shadow-sm transition-all duration-200
+            hover:-translate-y-0.5 hover:bg-[#2043CC]
+            hover:shadow-md
+            focus-visible:outline-none
+            focus-visible:ring-2 focus-visible:ring-blue-500
+            focus-visible:ring-offset-2
+            motion-reduce:transform-none
+            motion-reduce:transition-none
+          "
+              >
                 Join Quiz
-                <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </a>
-              <a href="#" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800" style={{ color: theme.color }}>
+
+              <a
+                href="/host"
+                className="
+            inline-flex items-center justify-center
+            rounded-xl border border-slate-300
+            px-5 py-3 text-sm font-semibold
+            transition-colors duration-200
+            hover:bg-slate-100
+            focus-visible:outline-none
+            focus-visible:ring-2 focus-visible:ring-blue-500
+            focus-visible:ring-offset-2
+            dark:border-slate-600 dark:hover:bg-slate-800
+          "
+                style={{ color: theme.color }}
+              >
                 Create the Quiz
               </a>
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-5">
 
-            <img src={theme.mode == "light" ? HeroImage : HeroDarkImage} alt="quiz" className='' />
+          <div
+            className="
+        flex w-full min-w-0 items-center
+        justify-center lg:justify-end
+      "
+          >
+            <div
+              className="
+          relative isolate h-75 w-full max-w-140
+          sm:h-95
+          lg:h-120
+        "
+            >
+              <div
+                aria-hidden="true"
+                className="
+            pointer-events-none absolute inset-[12%]
+            -z-10 rounded-full bg-blue-500/5 blur-3xl
+          "
+              />
+
+              <img
+                src={theme.mode === "light" ? HeroImage : HeroDarkImage}
+                alt="Preview of a live ScoreFlex quiz"
+                className="
+            absolute inset-0 block h-full w-full
+            object-contain object-center
+          "
+                draggable={false}
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <section
-        className="py-10 sm:py-12 bg-[#eff4ff]"
-        // style={{ backgroundColor: theme.backgroundColor }}
-        aria-label="Quiz platform features"
+        className={`py-10 sm:py-12 ${mode == 'light' ? 'bg-[#eff4ff]' : 'bg-[#414648]'}`}
+        aria-label="Platform features"
       >
         <div className="mx-auto max-w-6xl px-4 ">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

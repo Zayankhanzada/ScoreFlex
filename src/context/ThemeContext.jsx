@@ -16,12 +16,13 @@ const darkTheme = {
 
 export function ThemeProvider ({children}){
     const [theme,setTheme] = useState(lightTheme);
+    const mode = theme.mode;
     const changeTheme = () => {
         setTheme ((prev)=> 
         prev.mode === "light" ? darkTheme: lightTheme);
     }
     return  (
-        <ThemeContext.Provider value ={{theme, changeTheme}}>
+        <ThemeContext.Provider value ={{theme, changeTheme, mode}}>
             {children}
         </ThemeContext.Provider>
  

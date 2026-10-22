@@ -18,20 +18,18 @@ function FooterLinks({ title, links }) {
     const { theme, changeTheme } = useTheme()
     return (
         <nav aria-label={title}>
-            <h2 className="text-sm font-semibold uppercase tracking-wide" style={{ color: theme.color }}>
+            <h2 className="text-sm font-semibold  tracking-wide" style={{ color: theme.color }}>
                 {title}
             </h2>
 
             <ul className="mt-3 space-y-2.5">
-                {links.map(({ label, href, status }) => (
+                {links.map(({ label, href }) => (
                     <li key={label}>
                         <a
                             href={href}
                             className="inline-flex items-center gap-2 text-sm text-slate-900 transition-colors duration-200 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                             style={{ color: theme.color }}>
                             {label}
-
-
                         </a>
                     </li>
                 ))}
@@ -42,9 +40,9 @@ function FooterLinks({ title, links }) {
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
-    const { theme, changeTheme } = useTheme();
+    const { theme, changeTheme, mode } = useTheme();
     return (
-        <footer className="border-t border-slate-200 bg-white" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+        <footer className="  bg-white" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Main footer */}
                 <div
@@ -87,26 +85,22 @@ export default function Footer() {
             md:justify-between md:gap-6
           "
                 >
-                    <p className="text-slate-600 lg:text-[14px] text-[12px]">
+                    <p className="text-slate-400 lg:text-[14px] text-[12px]">
                         © {currentYear} ScoreFlex Inc. All rights reserved.
                     </p>
 
                     <div
-                        className="
-              inline-flex w-fit max-w-full items-center gap-2
-              rounded-full bg-blue-50 px-3 py-2
-              text-xs font-medium text-slate-700
-              sm:text-sm
-            "
+                        className={`${mode == 'light' ? 'bg-blue-50' : 'bg-[#414648]'} inline-flex w-fit max-w-full items-center gap-1 rounded-full px-3 py-2 text-[14px] font-medium sm:text-sm`}
+            
                         style={{ color: theme.color }}  >
                         <span
                             aria-hidden="true"
-                            className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500"
+                            className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-600"
                         />
 
-                        <span >
+                        <span className="text-[12px] lg:text-[14px]" style={{ color: theme.color }} >
                             Score Engine v0.1
-                            <span className="mx-1.5 text-slate-400">•</span>
+                            <span className="mx-1.5">•</span>
                             All Systems Operational
                         </span>
                     </div>
