@@ -4,7 +4,7 @@ import favicon from "/favicon.png";
 
 export default function Navbar() {
 
-    const {theme, changeTheme} = useTheme();
+    const {theme, changeTheme, mode} = useTheme();
     const [profileOpen, setProfileOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -61,10 +61,10 @@ export default function Navbar() {
 
     return (
         <nav
-            className="relative flex items-center justify-between border-b  py-3 sm:px-6 lg:px-30"
+            className={`relative flex items-center justify-between border-b  py-3 sm:px-6 lg:px-30 ${mode == "light" ? "bg-white":"bg-[#414648]" }`}
             style={{
                 color: theme.color,
-                backgroundColor: theme.backgroundColor,
+                
                 borderColor: isDark ? "#475569" : "#E2E8F0",
             }}
         >

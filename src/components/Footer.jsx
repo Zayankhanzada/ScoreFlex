@@ -42,7 +42,7 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
     const { theme, changeTheme, mode } = useTheme();
     return (
-        <footer className="  bg-white" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+        <footer className={`${mode == "light" ? "bg-white":"bg-[#414648]" }`} style={{ color: theme.color }}>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Main footer */}
                 <div
