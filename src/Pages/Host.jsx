@@ -4,11 +4,29 @@ import { House, Sparkles, SquarePen, CircleCheck, Zap, SlidersHorizontal } from 
 import { useTheme } from "../context/ThemeContext"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import AutomatedQuiz from "../components/Automatedquiz"
+import ManualQuiz from "../components/Manualquiz"
+const CATEGORIES = [
+  "General Knowledge",
+  "Science & Nature",
+  "Tech & Coding",
+  "World History",
+  "Pop Culture",
+];
 
+const QUESTION_COUNTS = [5, 10, 15, 20];
+const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 
 export default function Host() {
   const { theme, changeTheme, mode } = useTheme();
   const [selectedMode, setSelectedMode] = useState("ai");
+  const [quizSettings, setQuizSettings] = useState({
+    title: "Friday Quiz Night",
+    category: "",
+    questionCount: 10,
+    difficulty: "Medium",
+    strictModeration: true,
+  });
   return (
     <>
       <Navbar />
@@ -31,7 +49,7 @@ export default function Host() {
               type="button"
               onClick={() => setSelectedMode("ai")}
               aria-pressed={selectedMode === "ai"}
-              className={`group relative isolate flex min-h-72 flex-col overflow-hidden rounded-2xl border-2 p-6 text-left transition-all duration-300 sm:p-8 ${selectedMode === "ai"
+              className={`group relative isolate flex min-h-0 flex-col overflow-hidden rounded-2xl border-2 p-5 text-left transition-all duration-300 sm:p-6 ${selectedMode === "ai"
                 ? "border-blue-600 shadow-md shadow-blue-600/5 dark:border-blue-400  "
                 : " shadow-sm hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg  dark:hover:border-slate-300"
                 } ${mode == 'light' ? 'bg-white hover:bg-blue-100 border-slate-200 ' : 'bg-[#414648]'}`} style={{ color: theme.color }}
@@ -39,12 +57,12 @@ export default function Host() {
               {selectedMode === "ai" && (
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-12 -right-10 -z-10 size-40 rounded-full bg-indigo-50 dark:bg-blue-500/5"
+                  className="pointer-events-none absolute -bottom-12 -right-10 -z-10 size-32 rounded-full bg-indigo-50 dark:bg-blue-500/5"
                 />
               )}
 
               <div className="flex w-full items-start justify-between gap-4">
-                <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-blue-700 text-white  transition-colors  dark:bg-blue-600 " >
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-blue-700 text-white  transition-colors  dark:bg-blue-600 " >
                   <Sparkles size={28} />
                 </span>
 
@@ -60,19 +78,19 @@ export default function Host() {
                 )}
               </div>
 
-              <div className="mt-6">
+              <div className="mt-4">
                 <h3 className="text-xl font-semibold tracking-tight sm:text-2xl mb-3" style={{ color: theme.color }}>
                   ScoreFlex Engine Generated Quiz
                 </h3>
 
-                <p className={`mt-2 text-base leading-7 ${mode == 'light' ? 'text-slate-500' : 'text-slate-200'}`}>
+                <p className={`mt-2 text-base leading-6 ${mode == 'light' ? 'text-slate-500' : 'text-slate-200'}`}>
                   Let ScoreFlex Engine craft questions, realistic distractors, and concise
                   explanations in seconds from any topic.
                 </p>
               </div>
 
               <div
-                className={`mt-6 flex items-center gap-2 text-sm font-medium sm:text-base ${selectedMode === "ai"
+                className={`mt-4 flex items-center gap-2 text-sm font-medium sm:text-base ${selectedMode === "ai"
                   ? "text-blue-700 dark:text-blue-400"
                   : "text-slate-700 dark:text-slate-300"
                   }`}
@@ -86,7 +104,7 @@ export default function Host() {
               type="button"
               onClick={() => setSelectedMode("custom")}
               aria-pressed={selectedMode === "custom"}
-              className={`group relative isolate flex min-h-72 flex-col overflow-hidden rounded-2xl border-2 p-6 text-left transition-all duration-300 sm:p-8 ${selectedMode === "custom"
+              className={`group relative isolate flex min-h-0 flex-col overflow-hidden rounded-2xl border-2 p-5 text-left transition-all duration-300 sm:p-6 ${selectedMode === "custom"
                 ? "border-blue-600 shadow-md shadow-blue-600/5 dark:border-blue-400"
                 : "shadow-sm hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg dark:hover:border-slate-300"
                 } ${mode == "light"
@@ -98,12 +116,12 @@ export default function Host() {
               {selectedMode === "custom" && (
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-12 -right-10 -z-10 size-40 rounded-full bg-indigo-50 dark:bg-blue-500/5"
+                  className="pointer-events-none absolute -bottom-12 -right-10 -z-10 size-32 rounded-full bg-indigo-50 dark:bg-blue-500/5"
                 />
               )}
 
               <div className="flex w-full items-start justify-between gap-4">
-                <span className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-blue-700 text-white transition-colors">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-blue-700 text-white transition-colors">
                   <SquarePen size={28} />
                 </span>
 
@@ -119,7 +137,7 @@ export default function Host() {
                 )}
               </div>
 
-              <div className="mt-6">
+              <div className="mt-4">
                 <h3
                   className="mb-3 text-xl font-semibold tracking-tight sm:text-2xl"
                   style={{ color: theme.color }}
@@ -127,14 +145,14 @@ export default function Host() {
                   Custom Quiz
                 </h3>
 
-                <p className={`mt-2 text-base leading-7 ${mode == 'light' ? 'text-slate-500' : 'text-slate-200'}`}>
+                <p className={`mt-2 text-base leading-6 ${mode == 'light' ? 'text-slate-500' : 'text-slate-200'}`}>
                   Build your own quiz with full control. Add multiple-choice
                   options, time limits, and custom media.
                 </p>
               </div>
 
               <div
-                className={`mt-6 flex items-center gap-2 text-sm font-medium sm:text-base ${selectedMode === "custom"
+                className={`mt-4 flex items-center gap-2 text-sm font-medium sm:text-base ${selectedMode === "custom"
                   ? "text-blue-700 dark:text-blue-400"
                   : "text-slate-700 dark:text-slate-300"
                   }`}
@@ -146,6 +164,13 @@ export default function Host() {
           </div>
         </div>
       </section>
+       <section>
+        <div className="container mx-auto w-full my-10">
+          {selectedMode == 'ai' ? <AutomatedQuiz/> : <ManualQuiz/>}
+        </div>
+       </section>
+      
+
       <Footer />
     </>
   )
