@@ -1,7 +1,6 @@
 import { memo, useCallback, useId, useMemo, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 
-/* ---------- Static config (outside component = no re-creation per render) ---------- */
 
 const MAX_TITLE_LENGTH = 60;
 const MAX_TOPIC_LENGTH = 80;
@@ -54,10 +53,11 @@ const CounterInput = memo(function CounterInput({
     placeholder,
     onChange,
 }) {
+    const {theme, mode} = useTheme(); 
     const id = useId();
     return (
         <div>
-            <label htmlFor={id} className="text-sm font-semibold text-slate-900">
+            <label htmlFor={id} className="text-sm font-semibold text-slate-900" style={{color:theme.color}}>
                 {label}
             </label>
             <div className="relative mt-2">
@@ -68,11 +68,11 @@ const CounterInput = memo(function CounterInput({
                     maxLength={max}
                     placeholder={placeholder}
                     onChange={(e) => onChange(e.target.value)}
-                    className="w-full rounded-xl bg-indigo-50 py-3.5 pl-4 pr-16 text-base text-slate-800 outline-none ring-1 ring-transparent transition placeholder:text-slate-400 focus:bg-white focus:ring-blue-600"
-                />
+                    className={`w-full rounded-xl  py-3.5 pl-4 pr-16 text-base text-slate-800 outline-none ring-1 ring-transparent transition placeholder:text-slate-400 focus:bg-white focus:ring-blue-600 ${mode == "light" ? "bg-indigo-50" : " border border-white text-white focus:text-slate-900 "}`}
+                 />
                 <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-500"
+                    className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-400"
                 >
                     {value.length}/{max}
                 </span>
@@ -89,12 +89,13 @@ const SegmentedControl = memo(function SegmentedControl({
     onChange,
 }) {
     const groupId = useId();
+    const {theme, mode}= useTheme();
 
     return (
         <div
             role="radiogroup"
             aria-labelledby={groupId}
-            className="grid auto-cols-fr grid-flow-col gap-1 rounded-xl bg-indigo-50 p-1"
+            className={`grid auto-cols-fr grid-flow-col gap-1 rounded-xl ${mode == "light" ? "bg-indigo-50":"border border-white"} p-1`}
         >
             <span id={groupId} className="sr-only">
                 {label}
@@ -110,8 +111,8 @@ const SegmentedControl = memo(function SegmentedControl({
                         onClick={() => onChange(opt.value)}
                         className={`rounded-lg px-2 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${active
                                 ? "bg-blue-700 font-semibold text-white shadow-sm"
-                                : "text-slate-600 hover:bg-indigo-100"
-                            }`}
+                                : "text-slate-400 hover:bg-indigo-100"
+                            } `}
                     >
                         {opt.label}
                     </button>
@@ -168,7 +169,6 @@ export default function AutomatedQuiz({
         ...initialValues,
     });
 
-    // Single updater keeps the parent in sync without extra effects.
     const update = useCallback(
         (patch) => {
             setSettings((prev) => {
@@ -197,7 +197,7 @@ export default function AutomatedQuiz({
     return (
         <section
             aria-labelledby="quick-settings-heading"
-            className="mx-auto w-full max-w-7xl rounded-2xl p-4 shadow-xl ring-1 ring-slate-100 sm:p-6 lg:p-8"
+            className={`mx-auto w-full max-w-7xl rounded-2xl p-4 shadow-xl sm:p-6 lg:p-8 ${mode == "light" ? "bg-[#eff4ff] " : "bg-[#414648] ring border-[#2d3132]"}`}
             style={{ backgroundColor: theme.backgroundColor }}>
             {/* Header */}
             <header className="text-center">
@@ -205,11 +205,11 @@ export default function AutomatedQuiz({
                     <h2
                         id="quick-settings-heading"
                         className="text-xl font-bold text-slate-900 sm:text-2xl"
-                    >
+                    style={{color:theme.color}}>
                         Quick Settings
                     </h2>
                     <p className="mt-0.5 text-sm text-slate-500">
-                        Configure Rules before launching the room generator.
+                        Configure Board before launching the room generator.
                     </p>
                 </div>
             </header>
@@ -222,6 +222,7 @@ export default function AutomatedQuiz({
                     max={MAX_TITLE_LENGTH}
                     placeholder="e.g. John's Quiz"
                     onChange={setTitle}
+                    
                 />
                 <CounterInput
                     label="Quiz Is About"
@@ -229,12 +230,13 @@ export default function AutomatedQuiz({
                     max={MAX_TOPIC_LENGTH}
                     placeholder="e.g. World capitals"
                     onChange={setTopic}
+                
                 />
             </div>
 
             {/* Suggested topics */}
             <div className="mt-6">
-                <span className=" font-medium text-slate-800">Popular Topics</span>
+                <span className=" font-medium text-slate-800" style={{color:theme.color}}>Popular Topics</span>
                 <div className="mt-2 flex items-center justify-center flex-wrap gap-2">
                     {SUGGESTED_TOPICS.map((topic) => (
                         <Chip
@@ -251,7 +253,7 @@ export default function AutomatedQuiz({
             {/* Questions + Difficulty */}
             <div className="mt-6 grid gap-6 md:grid-cols-2 md:gap-8">
                 <div>
-                    <span className="text-sm font-semibold text-slate-900">
+                    <span className="text-sm font-semibold text-slate-900" style={{color:theme.color}}  >
                         Number of Questions
                     </span>
                     <div className="my-2">
@@ -262,13 +264,13 @@ export default function AutomatedQuiz({
                             onChange={setQuestions}
                         />
                     </div>
-                    <p className="mt-2 text-sm text-slate-500">
+                    <p className="mt-2 text-sm text-slate-400">
                         Estimated play duration: {duration} minutes
                     </p>
                 </div>
 
                 <div>
-                    <span className="text-sm font-semibold text-slate-900 mb-3">
+                    <span className="text-sm font-semibold text-slate-900 mb-3" style={{color:theme.color}}>
                         Difficulty Level
                     </span>
                     <div className="my-2">
@@ -279,28 +281,28 @@ export default function AutomatedQuiz({
                             onChange={setDifficulty}
                         />
                     </div>
-                    <p className="mt-2 text-sm text-slate-500">
+                    <p className="mt-2 text-sm text-slate-400">
                         Adaptive scoring: {points} pts / Question
                     </p>
                 </div>
             </div>
 
             {/* AI preset banner */}
-            <div className="mt-6 flex flex-col gap-3 rounded-xl bg-indigo-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className={`mt-6 flex flex-col gap-3 rounded-xl ${mode == "light" ? "bg-indigo-50" : "bg-slate-800 "} p-4 sm:flex-row sm:items-center sm:justify-between`}>
                 <div className="flex items-center gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-blue-700">
                         <BrainIcon />
                     </div>
                     <div className="min-w-0">
-                        <p className="text-start font-semibold text-slate-900">AI Preset Active</p>
-                        <p className="text-sm text-slate-600">
-                            Includes explanations, 30s timers.
+                        <p className="text-start font-semibold text-slate-900" style={{color:theme.color}}>AI Preset Rules </p>
+                        <p className="text-sm text-slate-400">
+                            Includes explanations, 30s timer/ Question.
                         </p>
                     </div>
                 </div>
                 <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-900">
                     <SlidersIcon />
-                    Strict Moderation On
+                    Active
                 </span>
             </div>
         </section>

@@ -20,13 +20,7 @@ const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 export default function Host() {
   const { theme, changeTheme, mode } = useTheme();
   const [selectedMode, setSelectedMode] = useState("ai");
-  const [quizSettings, setQuizSettings] = useState({
-    title: "Friday Quiz Night",
-    category: "",
-    questionCount: 10,
-    difficulty: "Medium",
-    strictModeration: true,
-  });
+
   return (
     <>
       <Navbar />
@@ -165,7 +159,7 @@ export default function Host() {
         </div>
       </section>
        <section>
-        <div className="container mx-auto w-full my-10">
+        <div className="container mx-auto w-full py-10" style={{backgroundColor:theme.backgroundColor}}>
           {selectedMode == 'ai' ? <AutomatedQuiz/> : <ManualQuiz/>}
         </div>
        </section>

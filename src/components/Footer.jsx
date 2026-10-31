@@ -42,7 +42,7 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
     const { theme, changeTheme, mode } = useTheme();
     return (
-        <footer className={` border-t ${mode == "light" ? "bg-white border-transparent":"bg-[#414648] border-[#2d3132]" }`} style={{ color: theme.color }}>
+        <footer className={` border-t ${mode == "light" ? "bg-white border-[#E2DFD4] " : "bg-[#414648] border-[#2d3132]"}`} style={{ color: theme.color }}>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Main footer */}
                 <div
@@ -91,7 +91,7 @@ export default function Footer() {
 
                     <div
                         className={`${mode == 'light' ? 'bg-blue-50' : 'bg-[#414648]'} inline-flex w-fit max-w-full items-center gap-1 rounded-full px-3 py-2 text-[14px] font-medium sm:text-sm`}
-            
+
                         style={{ color: theme.color }}  >
                         <span
                             aria-hidden="true"
