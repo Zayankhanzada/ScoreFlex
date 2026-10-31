@@ -6,16 +6,8 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import AutomatedQuiz from "../components/Automatedquiz"
 import ManualQuiz from "../components/Manualquiz"
-const CATEGORIES = [
-  "General Knowledge",
-  "Science & Nature",
-  "Tech & Coding",
-  "World History",
-  "Pop Culture",
-];
 
-const QUESTION_COUNTS = [5, 10, 15, 20];
-const DIFFICULTIES = ["Easy", "Medium", "Hard"];
+
 
 export default function Host() {
   const { theme, changeTheme, mode } = useTheme();
@@ -158,12 +150,16 @@ export default function Host() {
           </div>
         </div>
       </section>
-       <section>
-        <div className="container mx-auto w-full py-10" style={{backgroundColor:theme.backgroundColor}}>
-          {selectedMode == 'ai' ? <AutomatedQuiz/> : <ManualQuiz/>}
+      <section>
+        <div className="container mx-auto w-full py-10" style={{ backgroundColor: theme.backgroundColor }}>
+          {selectedMode == 'ai' ? <AutomatedQuiz /> : <ManualQuiz />}
+          {/* {selectedMode ? ( selectedMode == 'ai' ? <AutomatedQuiz/> : <ManualQuiz/>
+          ) : (
+          ""
+          )} */}
         </div>
-       </section>
-      
+      </section>
+
 
       <Footer />
     </>
