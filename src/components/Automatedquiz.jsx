@@ -28,20 +28,35 @@ const DIFFICULTY_OPTIONS = [
 ];
 
 /* ---------- Small reusable pieces ---------- */
-
 const Chip = memo(function Chip({ label, active, onClick }) {
+    const {mode}= useTheme();
+  
     return (
-        <button
-            type="button"
-            onClick={onClick}
-            aria-pressed={active}
-            className={`rounded-full px-4 py-1.5 shadow-md  font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:text-[15px] ${active
-                    ? "bg-blue-700 font-semibold text-white"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                }`}
-        >
-            {label}
-        </button>
+    
+<button
+    type="button"
+    onClick={onClick}
+    aria-pressed={active}
+    className={`
+        rounded-full px-4 py-1.5 shadow-md font-medium
+        transition-all duration-300
+        focus:outline-none focus-visible:ring-2
+        focus-visible:ring-blue-500
+        focus-visible:ring-offset-2 sm:text-[15px]
+
+        ${active
+            ? "bg-blue-700 font-semibold text-white shadow-blue-500/20"
+            : mode === "dark"
+                ? "bg-[#222938] text-slate-300 hover:bg-[#303B50] hover:text-white"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+        }
+
+        ${mode === "dark" ? "focus-visible:ring-offset-[#222938]" : "focus-visible:ring-offset-white"}
+    `}
+>
+    {label}
+</button>
+
     );
 });
 
@@ -197,7 +212,7 @@ export default function AutomatedQuiz({
     return (
         <section
             aria-labelledby="quick-settings-heading"
-            className={`mx-auto w-full max-w-7xl rounded-2xl p-4 shadow-xl sm:p-6 lg:p-8 ${mode == "light" ? "bg-[#eff4ff] " : "bg-[#414648] ring border-[#2d3132]"}`}
+            className={`mx-auto w-full max-w-7xl rounded-2xl p-4 shadow-xl sm:p-6 lg:p-8 ${mode == "light" ? "bg-[#eff4ff] " : "bg-[#414648] ring border-[#39445A]"}`}
             style={{ backgroundColor: theme.backgroundColor }}>
             {/* Header */}
             <header className="text-center">
@@ -300,10 +315,7 @@ export default function AutomatedQuiz({
                         </p>
                     </div>
                 </div>
-                <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-900">
-                    <SlidersIcon />
-                    Active
-                </span>
+                
             </div>
         </section>
     );

@@ -38,7 +38,7 @@ export default function Host() {
               className={`group relative isolate flex min-h-0 flex-col overflow-hidden rounded-2xl border-2 p-5 text-left transition-all duration-300 sm:p-6 ${selectedMode === "ai"
                 ? "border-blue-600 shadow-md shadow-blue-600/5 dark:border-blue-400  "
                 : " shadow-sm hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg  dark:hover:border-slate-300"
-                } ${mode == 'light' ? 'bg-white hover:bg-blue-100 border-slate-200 ' : 'bg-[#414648]'}`} style={{ color: theme.color }}
+                } ${mode == 'light' ? 'bg-white hover:bg-blue-100 border-slate-200 ' : 'bg-[#414648] border-[#39445A]'}`} style={{ color: theme.color }}
             >
               {selectedMode === "ai" && (
                 <span
@@ -95,7 +95,7 @@ export default function Host() {
                 : "shadow-sm hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg dark:hover:border-slate-300"
                 } ${mode == "light"
                   ? "bg-white hover:bg-blue-100 border-slate-200"
-                  : "bg-[#414648]"
+                  : "bg-[#414648] border-[#39445A]"
                 }`}
               style={{ color: theme.color }}
             >
@@ -150,8 +150,8 @@ export default function Host() {
           </div>
         </div>
       </section>
-      <section>
-        <div className="container mx-auto w-full py-10" style={{ backgroundColor: theme.backgroundColor }}>
+      <section style={{ backgroundColor: theme.backgroundColor }}>
+        <div className="container mx-auto  w-full py-10" >
           {selectedMode == 'ai' ? <AutomatedQuiz /> : <ManualQuiz />}
           {/* {selectedMode ? ( selectedMode == 'ai' ? <AutomatedQuiz/> : <ManualQuiz/>
           ) : (
